@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Layouts and Responsive Design</title>
+
+    <style>
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .animate-image {
+            animation: bounce 1s ease;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        input.highlight,
+        select.highlight {
+            background-color: #fff4d2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Ordered List</h2>
+    <ol type="I">
+        <li>What</li>
+        <li>This</li>
+        <li>Is</li>
+        <li>Great</li>
+    </ol>
+
+    <h2>Pexel</h2>
+    <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg" alt="Pexels Image" width="500" id="animatedImage">
+
+    <h2>Contacts Table</h2>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Joy</td>
+                <td>Nairobi</td>
+                <td>0798717800</td>
+                <td>joy.gichure@outlook.com</td>
+            </tr>
+            <tr>
+                <td>Wanjiru</td>
+                <td>Nairobi</td>
+                <td>0798717800</td>
+                <td>joy.gichure@outlook.com</td>
+            </tr>
+            <tr>
+                <td>Gichure</td>
+                <td>Nairobi</td>
+                <td>0798717800</td>
+                <td>joy.gichure@outlook.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Registration Form</h2>
+    <form id="registrationForm" action="#" method="post">
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required><br><br>
+
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter a password" required minlength="6"><br><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <label for="country">Select Country:</label><br>
+        <select id="country" name="country" required>
+            <option value="">--Choose a country--</option>
+            <option value="us">United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+            <option value="au">Australia</option>
+        </select><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+
+        <label>Hobbies:</label><br>
+        <input type="checkbox" id="sports" name="hobbies" value="sports">
+        <label for="sports">Sports</label><br>
+        <input type="checkbox" id="music" name="hobbies" value="music">
+        <label for="music">Music</label><br>
+        <input type="checkbox" id="travel" name="hobbies" value="travel">
+        <label for="travel">Travel</label><br><br>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+    
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const country = document.getElementById('country').value;
+
+            const userData = { name, email, country };
+            localStorage.setItem('userPreferences', JSON.stringify(userData));
+
+            alert('Preferences saved!');
+        });
+
+   
+        window.onload = function () {
+            const savedData = localStorage.getItem('userPreferences');
+            if (savedData) {
+                const { name, email, country } = JSON.parse(savedData);
+                if (name) {
+                    document.getElementById('name').value = name;
+                    document.getElementById('name').classList.add('highlight');
+                }
+                if (email) {
+                    document.getElementById('email').value = email;
+                    document.getElementById('email').classList.add('highlight');
+                }
+                if (country) {
+                    document.getElementById('country').value = country;
+                    document.getElementById('country').classList.add('highlight');
+                }
+            }
+        };
+
+      
+        const img = document.getElementById('animatedImage');
+        img.addEventListener('click', function () {
+            img.classList.remove('animate-image'); 
+            void img.offsetWidth; 
+            img.classList.add('animate-image'); 
+        });
+    </script>
+
+</body>
+
+</html>
